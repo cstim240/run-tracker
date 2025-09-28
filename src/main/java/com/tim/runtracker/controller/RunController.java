@@ -18,16 +18,21 @@ public class RunController {
         this.repository = repository;
     }
 
-    @GetMapping("/test")
-    public String test() {
-        return "Run tracker is working!!";
-    }
-
     // GET retrieves existing data
     @GetMapping("/runs")
     public List<Run> getAllRuns() {
         System.out.println("Getting all the runs?");
         return repository.findAll();
+    }
+    
+    // GET mapping which retrieves a specific run
+    @GetMapping("/runs/{id}")
+    public Run getRun(@PathVariable Long id){
+        // throw an exception if id is invalid
+        Optional<Run> optionalRun = repository.findById(id);
+        return optionalRun.orElseThrow(() ->
+            new RuntimeException("Run not found!")
+        );
     }
 
     // POST adds new data
