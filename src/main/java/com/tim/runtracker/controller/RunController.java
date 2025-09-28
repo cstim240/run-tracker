@@ -1,0 +1,51 @@
+package com.tim.runtracker.controller;
+
+import com.tim.runtracker.model.Run;
+import com.tim.runtracker.repository.RunRepository;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+public class RunController {
+
+    private final RunRepository repository;
+
+    //dependency injection! Spring injects the repository by calling this constructor with the repository (so we don't use 'new' to create one)
+    // our controller depends on the repository, spring injects that dependency for you
+    public RunController(RunRepository repository) {
+        this.repository = repository;
+    }
+
+    @GetMapping("/test")
+    public String test() {
+        return "Run tracker is working!!";
+    }
+
+    // GET retrieves existing data
+    @GetMapping("/runs")
+    public List<Run> getAllRuns() {
+        System.out.println("Getting all the runs?");
+        return repository.findAll();
+    }
+
+    // POST adds new data
+    @PostMapping("/runs")
+    public Run createRun(@RequestBody Run run){
+        return repository.save(run);
+    }
+
+    // PUT modifies existing data
+    @PutMapping("/runs/{id}")
+    public Run updateRun(@PathVariable Long id, @RequestBody Run run){
+        run.setId(id);
+        return repository.save(run);
+    }
+
+    @DeleteMapping("/runs/{id}")
+    public void deleteRun(@PathVariable Long id) {
+        repository.deleteById(id);
+    }
+
+}
