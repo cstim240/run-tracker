@@ -18,6 +18,47 @@ public class Run {
     private Long id;
     private LocalDate date;
     private Double distance;
+    private Integer duration;
 
     // constructors, getters, setters
+    public Run(){}
+
+    public Run(LocalDate date, Double distance, Integer duration) {
+        this.date = date;
+        this.distance = distance;
+        this.duration = duration;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public Double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(Double distance) {
+        this.distance = distance;
+    }
+
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
 }
