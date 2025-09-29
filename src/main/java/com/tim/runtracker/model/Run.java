@@ -3,9 +3,9 @@ package com.tim.runtracker.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Positive;
-import org.springframework.lang.NonNull;
 
 import java.time.LocalDate;
 
@@ -20,12 +20,11 @@ public class Run {
     @Id @GeneratedValue
     private Long id;
 
-    @NonNull
-    @PastOrPresent(message = "input date cannot happen in the future")
+    @NotNull @PastOrPresent(message = "input date cannot happen in the future")
     private LocalDate date;
-    @NonNull @Positive(message = "distance cannot be negative")
+    @NotNull @Positive(message = "distance cannot be negative")
     private Double distance;
-    @NonNull @Positive(message = "duration cannot be negative")
+    @NotNull @Positive(message = "duration cannot be negative")
     private Integer duration;
 
     // constructors, getters, setters

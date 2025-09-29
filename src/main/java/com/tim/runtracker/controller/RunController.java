@@ -2,6 +2,7 @@ package com.tim.runtracker.controller;
 
 import com.tim.runtracker.model.Run;
 import com.tim.runtracker.repository.RunRepository;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,13 +38,13 @@ public class RunController {
 
     // POST adds new data
     @PostMapping("/runs")
-    public Run createRun(@RequestBody Run run){
+    public Run createRun(@Valid @RequestBody Run run){
         return repository.save(run);
     }
 
     // PUT modifies existing data
     @PutMapping("/runs/{id}")
-    public Run updateRun(@PathVariable Long id, @RequestBody Run run){
+    public Run updateRun(@PathVariable Long id, @Valid @RequestBody Run run){
         run.setId(id);
         return repository.save(run);
     }
