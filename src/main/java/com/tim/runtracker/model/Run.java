@@ -24,7 +24,7 @@ public class Run {
     private Double distance;
     @NotNull @Positive(message = "duration cannot be negative")
     private Integer duration;
-
+    // note: we use Double since it can be null (JPA requires this for entity fields)
     private Double pace;
 
     // constructors, getters, setters
@@ -79,6 +79,8 @@ public class Run {
     // @ PrePersist runs before making a new run and PreUpdate runs every time we update an existing run
     // lifecycle callbacks are function calls that are called whenever a specific point in an entity's lifecycle happens
     public void calculatePace() {
-        pace = (double) Math.round(duration/distance) * 100 / 100;
+        if (distance != null && duration != null && distance > 0){
+            pace = Math.round((duration/distance) * 100.0) / 100.0;
+        }
     }
 }
