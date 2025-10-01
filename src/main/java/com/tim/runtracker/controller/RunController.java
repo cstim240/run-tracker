@@ -6,7 +6,9 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -41,6 +43,15 @@ public class RunController {
     @GetMapping("/runs/date/{date}")
     public List<Run> getRunByDate(@PathVariable LocalDate date){
         return repository.findByDate(date);
+    }
+
+    @GetMapping("/run/stats")
+    public Map<String, Object> getStats(){
+        Map<String, Object> stats = new HashMap<>();
+        stats.put("totalDistance", repository.getTotalDistance());
+        stats.put("averagePace", repository.getAveragePace());
+        stats.put("longestRun", repository.getLongestRun());
+        return stats;
     }
 
     // POST adds new data
