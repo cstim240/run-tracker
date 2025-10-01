@@ -6,8 +6,9 @@ POST http://localhost:8080/runs
 Content-Type: application/json
 
 {
-  "distance": 5.0,
-  "duration": 30
+  "date": "2025-09-28",
+  "distance": 19,
+  "duration": 67
 }
 
 ### Get specific run we just created

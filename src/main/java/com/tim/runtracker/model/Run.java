@@ -1,8 +1,6 @@
 package com.tim.runtracker.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Positive;
@@ -26,6 +24,8 @@ public class Run {
     private Double distance;
     @NotNull @Positive(message = "duration cannot be negative")
     private Integer duration;
+
+    private Double pace;
 
     // constructors, getters, setters
     public Run(){}
@@ -67,5 +67,15 @@ public class Run {
 
     public void setDuration(Integer duration) {
         this.duration = duration;
+    }
+
+    public Double getPace() {
+        return pace;
+    }
+
+    @PrePersist
+    @PreUpdate
+    public void calculatePace() {
+        pace = (double) Math.round(duration/distance) * 100 / 100;
     }
 }
