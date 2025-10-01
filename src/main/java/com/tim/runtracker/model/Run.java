@@ -75,6 +75,9 @@ public class Run {
 
     @PrePersist
     @PreUpdate
+    // these JPA lifecycle annotations refer to the callbacks that occur with every relevant database transaction
+    // @ PrePersist runs before making a new run and PreUpdate runs every time we update an existing run
+    // lifecycle callbacks are function calls that are called whenever a specific point in an entity's lifecycle happens
     public void calculatePace() {
         pace = (double) Math.round(duration/distance) * 100 / 100;
     }
