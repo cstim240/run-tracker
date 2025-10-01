@@ -5,6 +5,7 @@ import com.tim.runtracker.repository.RunRepository;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +27,7 @@ public class RunController {
         return repository.findAll();
     }
     
-    // GET mapping which retrieves a specific run
+    // GET mapping which retrieves a specific run by ID
     @GetMapping("/runs/{id}")
     public Run getRun(@PathVariable Long id){
         // throw an exception if id is invalid
@@ -34,6 +35,12 @@ public class RunController {
         return optionalRun.orElseThrow(() ->
             new RuntimeException("Run not found!")
         );
+    }
+
+    // retrieve a run by date. Ie. /runs/date/2024-02-12
+    @GetMapping("/runs/date/{date}")
+    public List<Run> getRunByDate(@PathVariable LocalDate date){
+        return repository.findByDate(date);
     }
 
     // POST adds new data
