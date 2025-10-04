@@ -48,6 +48,7 @@ public class RunController {
     @GetMapping("/runs/stats")
     public Map<String, Object> getStats(){
         Map<String, Object> stats = new HashMap<>();
+        // ternary op for null check
         stats.put("totalDistance", repository.getTotalDistance() != null ? repository.getTotalDistance() : 0.0);
         stats.put("averagePace", repository.getAveragePace() != null ? repository.getAveragePace() : 0.0);
         stats.put("farthestRun", repository.getFarthestRun() != null ? repository.getFarthestRun() : 0.0);
