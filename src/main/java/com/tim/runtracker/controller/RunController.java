@@ -45,12 +45,14 @@ public class RunController {
         return repository.findByDate(date);
     }
 
+    // get significant run statistics, total distance, average pace, fastest pace, farthest run, longest run
     @GetMapping("/runs/stats")
     public Map<String, Object> getStats(){
         Map<String, Object> stats = new HashMap<>();
         // ternary op for null check
         stats.put("totalDistance", repository.getTotalDistance() != null ? repository.getTotalDistance() : 0.0);
         stats.put("averagePace", repository.getAveragePace() != null ? repository.getAveragePace() : 0.0);
+        stats.put("fastestPace", repository.getFastestPace() != null ? repository.getFastestPace() : 0.0);
         stats.put("farthestRun", repository.getFarthestRun() != null ? repository.getFarthestRun() : 0.0);
         stats.put("longestRun", repository.getLongestRun() != null ? repository.getLongestRun(): 0.0);
         return stats;

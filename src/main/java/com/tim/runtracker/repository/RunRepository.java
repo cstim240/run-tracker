@@ -24,6 +24,9 @@ public interface RunRepository extends JpaRepository<Run, Long> {
     @Query("SELECT AVG(r.pace) FROM Run r")
     Double getAveragePace();
 
+    @Query ("SELECT MIN(r.pace) FROM Run r")
+    Double getFastestPace();
+
     @Query("SELECT MAX(r.distance) FROM Run r")
     Double getFarthestRun();
 
