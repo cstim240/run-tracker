@@ -1,24 +1,55 @@
 ### Get all runs
+### need to handle empty db
 GET http://localhost:8080/runs
 
-### Create a new run
-POST http://localhost:8080/runs
-Content-Type: application/json
-
-{
-  "date": "2025-09-28",
-  "distance": 89,
-  "duration": 67
-}
-
-### Create a new run
+### Create a new run 1 - test out all time endpoint
 POST http://localhost:8080/runs
 Content-Type: application/json
 
 {
   "date": "2025-10-04",
-  "distance": 900,
-  "duration": 23
+  "distance": 45,
+  "duration": 10
+}
+
+### Create a new run 2 - test out all time endpoint
+POST http://localhost:8080/runs
+Content-Type: application/json
+
+{
+  "date": "2025-10-02",
+  "distance": 5,
+  "duration": 3
+}
+
+### Create run C
+POST http://localhost:8080/runs
+Content-Type: application/json
+
+{
+  "date": "2025-01-10",
+  "distance": 10,
+  "duration": 5
+}
+
+### Create run D
+POST http://localhost:8080/runs
+Content-Type: application/json
+
+{
+  "date": "2025-02-15",
+  "distance": 20,
+  "duration": 8
+}
+
+### Create run E
+POST http://localhost:8080/runs
+Content-Type: application/json
+
+{
+  "date": "2025-03-20",
+  "distance": 15,
+  "duration": 6
 }
 
 ### Get specific run we just created
@@ -29,9 +60,9 @@ PUT http://localhost:8080/runs/4
 Content-Type: application/json
 
 {
-  "date": "2025-09-28",
-  "distance": 67.0,
-  "duration": 159
+  "date": "2025-10-04",
+  "distance": 90.0,
+  "duration": 20
 }
 
 ### Get specific run we just created
@@ -39,9 +70,6 @@ GET http://localhost:8080/runs/1
 
 ### Delete the run we made and modified
 DELETE http://localhost:8080/runs/2
-
-### Get all runs
-GET http://localhost:8080/runs
 
 ### Get run statistics
 GET http://localhost:8080/runs/stats

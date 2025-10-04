@@ -39,22 +39,23 @@ public class RunController {
         );
     }
 
-    // retrieve a run by date. Ie. /runs/date/2024-02-12
+    // retrieve a run by date. Example /runs/date/2024-02-12
     @GetMapping("/runs/date/{date}")
     public List<Run> getRunByDate(@PathVariable LocalDate date){
         return repository.findByDate(date);
     }
 
-    // get significant run statistics, total distance, average pace, fastest pace, farthest run, longest run
+    // get 'all-time' significant run statistics, total distance, average pace, fastest pace, farthest run, longest run
     @GetMapping("/runs/stats")
     public Map<String, Object> getStats(){
         Map<String, Object> stats = new HashMap<>();
+        LocalDate oldDate = LocalDate.of(1900, 1, 1);
         // ternary op for null check
-        stats.put("totalDistance", repository.getTotalDistance() != null ? repository.getTotalDistance() : 0.0);
-        stats.put("averagePace", repository.getAveragePace() != null ? repository.getAveragePace() : 0.0);
-        stats.put("fastestPace", repository.getFastestPace() != null ? repository.getFastestPace() : 0.0);
-        stats.put("farthestRun", repository.getFarthestRun() != null ? repository.getFarthestRun() : 0.0);
-        stats.put("longestRun", repository.getLongestRun() != null ? repository.getLongestRun(): 0.0);
+        stats.put("totalDistance", repository.getTotalDistance(oldDate) != null ? repository.getTotalDistance(oldDate) : 0.0);
+        stats.put("averagePace", repository.getAveragePace(oldDate) != null ? repository.getAveragePace(oldDate) : 0.0);
+        stats.put("fastestPace", repository.getFastestPace(oldDate) != null ? repository.getFastestPace(oldDate) : 0.0);
+        stats.put("farthestRun", repository.getFarthestRun(oldDate) != null ? repository.getFarthestRun(oldDate) : 0.0);
+        stats.put("longestRun", repository.getLongestRun(oldDate) != null ? repository.getLongestRun(oldDate): 0.0);
         return stats;
     }
 
