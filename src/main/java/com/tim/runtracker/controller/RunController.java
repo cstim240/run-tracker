@@ -3,6 +3,7 @@ package com.tim.runtracker.controller;
 import com.tim.runtracker.model.Run;
 import com.tim.runtracker.repository.RunRepository;
 import jakarta.validation.Valid;
+import org.springframework.cglib.core.Local;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -46,16 +47,40 @@ public class RunController {
     }
 
     // get 'all-time' significant run statistics, total distance, average pace, fastest pace, farthest run, longest run
-    @GetMapping("/runs/stats")
-    public Map<String, Object> getStats(){
-        Map<String, Object> stats = new HashMap<>();
-        LocalDate oldDate = LocalDate.of(1900, 1, 1);
+    @GetMapping("/runs/stats/all")
+    public Map<String, Object> getAllStats() {
+        LocalDate wayBackThen = LocalDate.of(1900, 1, 1);
+        return getStatsSince(wayBackThen);
+    }
+
+    @GetMapping("runs/stats/week")
+    public Map<String, Object> getWeekStats() {
+        LocalDate aWeekAgo = LocalDate.now().minusWeeks(1);
+        return getStatsSince(aWeekAgo);
+    }
+
+    @GetMapping("/runs/stats/month")
+    public Map<String, Object> getMonthStats() {
+        LocalDate aMonthAgo = LocalDate.now().minusMonths(1);
         // ternary op for null check
-        stats.put("totalDistance", repository.getTotalDistance(oldDate) != null ? repository.getTotalDistance(oldDate) : 0.0);
-        stats.put("averagePace", repository.getAveragePace(oldDate) != null ? repository.getAveragePace(oldDate) : 0.0);
-        stats.put("fastestPace", repository.getFastestPace(oldDate) != null ? repository.getFastestPace(oldDate) : 0.0);
-        stats.put("farthestRun", repository.getFarthestRun(oldDate) != null ? repository.getFarthestRun(oldDate) : 0.0);
-        stats.put("longestRun", repository.getLongestRun(oldDate) != null ? repository.getLongestRun(oldDate): 0.0);
+        return getStatsSince(aMonthAgo);
+    }
+
+    @GetMapping("/runs/stats/year")
+    public Map<String, Object> getYearStats() {
+        LocalDate aYearAgo = LocalDate.now().minusYears(1);
+        return getStatsSince(aYearAgo);
+    }
+
+    private Map<String, Object> getStatsSince(LocalDate startDate) {
+        Map<String, Object> stats = new HashMap<>();
+
+        stats.put("totalDistance", repository.getTotalDistance(startDate) != null ? repository.getTotalDistance(startDate) : 0.0);
+        stats.put("averagePace", repository.getAveragePace(startDate) != null ? repository.getAveragePace(startDate) : 0.0);
+        stats.put("fastestPace", repository.getFastestPace(startDate) != null ? repository.getFastestPace(startDate) : 0.0);
+        stats.put("farthestRun", repository.getFarthestRun(startDate) != null ? repository.getFarthestRun(startDate) : 0.0);
+        stats.put("longestRun", repository.getLongestRun(startDate) != null ? repository.getLongestRun(startDate): 0.0);
+
         return stats;
     }
 
