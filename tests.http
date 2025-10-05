@@ -2,57 +2,67 @@
 ### need to handle empty db
 GET http://localhost:8080/runs
 
-### Create a new run 1 - test out all time endpoint
-POST http://localhost:8080/runs
-Content-Type: application/json
-
-{
-  "date": "2025-10-04",
-  "distance": 45,
-  "duration": 10
-}
-
-### Create a new run 2 - test out all time endpoint
+### Create Run 1 - This week
 POST http://localhost:8080/runs
 Content-Type: application/json
 
 {
   "date": "2025-10-02",
-  "distance": 5,
-  "duration": 3
+  "distance": 5.0,
+  "duration": 40
 }
 
-### Create run C
+### Create Run 2 - This week
 POST http://localhost:8080/runs
 Content-Type: application/json
 
 {
-  "date": "2025-01-10",
-  "distance": 10,
-  "duration": 5
+  "date": "2025-10-01",
+  "distance": 3.5,
+  "duration": 28
 }
 
-### Create run D
+### Create Run 3 - This month (but not this week)
 POST http://localhost:8080/runs
 Content-Type: application/json
 
 {
-  "date": "2025-02-15",
-  "distance": 20,
-  "duration": 8
+  "date": "2025-09-25",
+  "distance": 6.0,
+  "duration": 48
 }
 
-### Create run E
+### Create Run 4 - This year (but not this month)
 POST http://localhost:8080/runs
 Content-Type: application/json
 
 {
-  "date": "2025-03-20",
-  "distance": 15,
-  "duration": 6
+  "date": "2025-08-15",
+  "distance": 10.0,
+  "duration": 80
 }
 
+### Create Run 5 - Older than a year
+POST http://localhost:8080/runs
+Content-Type: application/json
 
+{
+  "date": "2024-06-10",
+  "distance": 4.0,
+  "duration": 32
+}
+
+### Now test week stats (should show runs 1 & 2)
+GET http://localhost:8080/runs/stats/week
+
+### Test month stats (should show runs 1, 2 & 3)
+GET http://localhost:8080/runs/stats/month
+
+### Test year stats (should show runs 1, 2, 3 & 4)
+GET http://localhost:8080/runs/stats/year
+
+### Test all-time stats (should show all 5 runs)
+GET http://localhost:8080/runs/stats/all
 
 ### Get specific run we just created
 GET http://localhost:8080/runs/1
@@ -72,6 +82,9 @@ GET http://localhost:8080/runs/1
 
 ### Delete the run we made and modified
 DELETE http://localhost:8080/runs/2
+
+### Delete ALL runs
+DELETE http://localhost:8080/runs
 
 ### Get run statistics
 GET http://localhost:8080/runs/stats

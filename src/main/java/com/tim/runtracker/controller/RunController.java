@@ -53,7 +53,7 @@ public class RunController {
         return getStatsSince(wayBackThen);
     }
 
-    @GetMapping("runs/stats/week")
+    @GetMapping("/runs/stats/week")
     public Map<String, Object> getWeekStats() {
         LocalDate aWeekAgo = LocalDate.now().minusWeeks(1);
         return getStatsSince(aWeekAgo);
@@ -74,8 +74,10 @@ public class RunController {
 
     private Map<String, Object> getStatsSince(LocalDate startDate) {
         Map<String, Object> stats = new HashMap<>();
+        System.out.println("Getting stats since: " + startDate);
 
         stats.put("totalDistance", repository.getTotalDistance(startDate) != null ? repository.getTotalDistance(startDate) : 0.0);
+        System.out.println("Total dist: " + repository.getTotalDistance(startDate));
         stats.put("averagePace", repository.getAveragePace(startDate) != null ? repository.getAveragePace(startDate) : 0.0);
         stats.put("fastestPace", repository.getFastestPace(startDate) != null ? repository.getFastestPace(startDate) : 0.0);
         stats.put("farthestRun", repository.getFarthestRun(startDate) != null ? repository.getFarthestRun(startDate) : 0.0);
@@ -100,6 +102,11 @@ public class RunController {
     @DeleteMapping("/runs/{id}")
     public void deleteRun(@PathVariable Long id) {
         repository.deleteById(id);
+    }
+
+    @DeleteMapping("/runs")
+    public void deleteAllRuns() {
+        repository.deleteAll();
     }
 
 }
