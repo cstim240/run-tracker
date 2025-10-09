@@ -27,6 +27,13 @@ public class Run {
     // note: we use Double since it can be null (JPA requires this for entity fields)
     private Double pace;
 
+    // we want more fields to describe our run: location, weather, difficulty, notes
+    private String location;
+    private String weather;
+    private String notes;
+
+    private Difficulty difficulty;
+
     // constructors, getters, setters
     public Run(){}
 
@@ -82,5 +89,37 @@ public class Run {
         if (distance != null && duration != null && distance > 0){
             pace = Math.round((duration/distance) * 100.0) / 100.0;
         }
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getWeather() {
+        return weather;
+    }
+
+    public void setWeather(String weather) {
+        this.weather = weather;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
     }
 }
