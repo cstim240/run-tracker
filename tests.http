@@ -9,7 +9,11 @@ Content-Type: application/json
 {
   "date": "2025-10-02",
   "distance": 5.0,
-  "duration": 40
+  "duration": 40,
+  "location": "Vancouver",
+  "weather": "Cloudy",
+  "notes": "Great weather for a run!",
+  "difficulty": "Smedium"
 }
 
 ### Create Run 2 - This week
