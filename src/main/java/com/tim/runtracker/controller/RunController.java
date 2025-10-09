@@ -1,5 +1,6 @@
 package com.tim.runtracker.controller;
 
+import com.tim.runtracker.model.Difficulty;
 import com.tim.runtracker.model.Run;
 import com.tim.runtracker.repository.RunRepository;
 import jakarta.validation.Valid;
@@ -44,6 +45,11 @@ public class RunController {
     @GetMapping("/runs/date/{date}")
     public List<Run> getRunByDate(@PathVariable LocalDate date){
         return repository.findByDate(date);
+    }
+
+    @GetMapping("runs/date/{difficulty}")
+    public List<Run> getRunByDifficulty(@PathVariable Difficulty difficulty){
+        return repository.findByDifficulty(difficulty);
     }
 
     // get 'all-time' significant run statistics, total distance, average pace, fastest pace, farthest run, longest run

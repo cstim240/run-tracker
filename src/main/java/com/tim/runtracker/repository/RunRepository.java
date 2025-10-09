@@ -1,5 +1,6 @@
 package com.tim.runtracker.repository;
 
+import com.tim.runtracker.model.Difficulty;
 import com.tim.runtracker.model.Run;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -33,6 +34,8 @@ public interface RunRepository extends JpaRepository<Run, Long> {
 
     @Query("SELECT MAX(r.duration) FROM Run r WHERE r.date >= :startDate")
     Double getLongestRun(@Param("startDate") LocalDate startDate);
+
+    List<Run> findByDifficulty(Difficulty difficulty);
 }
 
 
