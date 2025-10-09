@@ -32,7 +32,8 @@ public class Run {
     private String weather;
     private String notes;
 
-    private Difficulty difficulty;
+    @Enumerated(EnumType.STRING)
+    private Difficulty difficulty = Difficulty.MODERATE;
 
     // constructors, getters, setters
     public Run(){}
