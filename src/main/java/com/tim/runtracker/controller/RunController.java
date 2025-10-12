@@ -4,7 +4,6 @@ import com.tim.runtracker.model.Difficulty;
 import com.tim.runtracker.model.Run;
 import com.tim.runtracker.repository.RunRepository;
 import jakarta.validation.Valid;
-import org.springframework.cglib.core.Local;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
